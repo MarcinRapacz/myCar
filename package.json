@@ -1,0 +1,30 @@
+{
+  "name": "my_car",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=production node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcinRapacz/myCar.git"
+  },
+  "keywords": [],
+  "author": "Marcin Rapacz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarcinRapacz/myCar/issues"
+  },
+  "homepage": "https://github.com/MarcinRapacz/myCar#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.6",
+    "nodemon": "^1.19.4"
+  }
+}
