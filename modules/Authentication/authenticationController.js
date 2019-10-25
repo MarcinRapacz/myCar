@@ -8,12 +8,44 @@ module.exports.create = async (req, res, next) => {
   try {
     handleValidator(req);
 
+    // Variables
+    const { email } = req.body;
+
+    // Check if the email address is free
+    const isExists = await Authentication.findOne({ email });
+    if (isExists) handleError({ msg: "User already exists", statusCode: 400 });
+
+    // Store user
     const authentication = await Authentication.create(req.body);
     const token = authentication.getToken();
 
     res
       .status(201)
       .json({ succes: true, data: { token }, msg: "User was created" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.login = async (req, res, next) => {
+  try {
+    handleValidator(req);
+
+    // Variables
+    const { email, password } = req.body;
+
+    // Login user
+    const user = await Authentication.login({ email, password });
+    if (!user) {
+      handleError({ msg: "Invalid credentials", statusCode: 401 });
+    }
+
+    // Get token
+    const token = user.getToken();
+
+    res
+      .status(200)
+      .json({ succes: true, data: { token }, msg: "User was logged" });
   } catch (error) {
     next(error);
   }

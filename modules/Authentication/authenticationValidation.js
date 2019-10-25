@@ -1,18 +1,43 @@
-const { check } = require("express-validator");
+const validator = require("../../validator");
+
+const config = {
+  name: {
+    field: "name",
+    msg: "The name must have a minimum of 2 characters",
+    min: 2
+  },
+  password: {
+    field: "password",
+    msg: "The password must have a minimum of 8 characters",
+    min: 8
+  },
+  password2: {
+    field: "password2",
+    field2: "password",
+    msg: "Passwords must be the same"
+  }
+};
 
 module.exports.create = [
-  check("name", "The name must have a minimum of 2 characters")
-    .trim()
-    .isLength({ min: 2 }),
-  check("email")
-    .isEmail()
-    .normalizeEmail(),
-  check("password", "The password must have a minimum of 8 characters")
-    .not()
-    .isEmpty()
-    .trim()
-    .isLength({ min: 8 }),
-  check("password2", "Passwords must be the same").custom(
-    (value, { req }) => value === req.body.password
+  validator.string(config.name.field, config.name.msg, config.name.min),
+  validator.email(),
+  validator.string(
+    config.password.field,
+    config.password.msg,
+    config.password.min
+  ),
+  validator.isSame(
+    config.password2.field,
+    config.password2.field2,
+    config.password2.msg
+  )
+];
+
+module.exports.login = [
+  validator.email(),
+  validator.string(
+    config.password.field,
+    config.password.msg,
+    config.password.min
   )
 ];

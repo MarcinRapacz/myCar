@@ -30,7 +30,10 @@ const authenticationSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-// Generate and return Json Web Token
+/**
+ * Generate and return Json Web Token
+ * @return Json Web Token
+ */
 authenticationSchema.methods.getToken = function() {
   const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
@@ -39,15 +42,21 @@ authenticationSchema.methods.getToken = function() {
   return token;
 };
 
-// Check if the user already exists
-authenticationSchema.pre("save", async function(next) {
-  const user = await this.model("Authentication").findOne({
-    email: this.email
-  });
+/**
+ * Login User
+ * @param email email address
+ * @param password user password
+ * @return user data if params are correct or null
+ */
+authenticationSchema.static("login", async function({ email, password }) {
+  const user = await this.findOne({ email }).select("+password");
   if (user) {
-    next({ msg: "User already exists", statusCode: 401 });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      return user;
+    }
   }
-  next();
+  return null;
 });
 
 // Hash password and store in data base

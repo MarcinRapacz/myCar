@@ -7,4 +7,8 @@ router
   .route("/create")
   .post(authenticationValidation.create, authenticationController.create);
 
+router
+  .route("/login")
+  .post(authenticationValidation.login, authenticationController.login);
+
 module.exports = router;
