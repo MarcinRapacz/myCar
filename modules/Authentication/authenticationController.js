@@ -59,3 +59,13 @@ module.exports.get = async (req, res, next) =>
     },
     msg: "User details"
   });
+
+module.exports.delete = async (req, res, next) => {
+  req.user.remove();
+
+  res.status(200).json({
+    succes: true,
+    data: {},
+    msg: "User removed"
+  });
+};

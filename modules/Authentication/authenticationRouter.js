@@ -14,6 +14,9 @@ router
   .route("/login")
   .post(authenticationValidation.login, authenticationController.login);
 
-router.route("/").get(auth, authenticationController.get);
+router
+  .route("/")
+  .get(auth, authenticationController.get)
+  .delete(auth, authenticationController.delete);
 
 module.exports = router;
