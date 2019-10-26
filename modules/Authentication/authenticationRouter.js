@@ -17,6 +17,7 @@ router
 router
   .route("/")
   .get(auth, authenticationController.get)
+  .put(auth, authenticationValidation.update, authenticationController.update)
   .delete(auth, authenticationController.delete);
 
 module.exports = router;

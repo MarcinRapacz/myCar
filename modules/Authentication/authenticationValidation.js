@@ -15,6 +15,9 @@ const config = {
     field: "password2",
     field2: "password",
     msg: "Passwords must be the same"
+  },
+  phoneNumber: {
+    locale: "pl-PL"
   }
 };
 
@@ -40,4 +43,9 @@ module.exports.login = [
     config.password.msg,
     config.password.min
   )
+];
+
+module.exports.update = [
+  validator.string(config.name.field, config.name.msg, config.name.min),
+  validator.phoneNumber(undefined, undefined, config.phoneNumber.locale)
 ];

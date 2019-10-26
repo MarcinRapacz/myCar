@@ -60,6 +60,26 @@ module.exports.get = async (req, res, next) =>
     msg: "User details"
   });
 
+module.exports.update = async (req, res, next) => {
+  try {
+    handleValidator(req);
+
+    const { name, phoneNumber } = req.body;
+    const { user } = req;
+
+    user.set({
+      name,
+      phoneNumber
+    });
+
+    await user.save();
+
+    res.status(200).json({ user });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.delete = async (req, res, next) => {
   req.user.remove();
 

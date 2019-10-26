@@ -29,3 +29,13 @@ module.exports.email = (field = "email") =>
  */
 module.exports.isSame = (field1, field2, msg) =>
   check(field2, msg).custom((value, { req }) => value === req.body[field1]);
+
+/**
+ * Check if field is correct phone number
+ * @param field phone number
+ * @param msg error message
+ */
+module.exports.phoneNumber = (field = "phoneNumber", msg, locale) =>
+  check(field, msg)
+    .optional({ checkFalsy: true })
+    .isMobilePhone(locale);
