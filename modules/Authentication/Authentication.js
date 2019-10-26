@@ -25,7 +25,12 @@ const authenticationSchema = mongoose.Schema(
       select: false
     },
     resetPasswordToken: String,
-    resetPasswordExpire: Date
+    resetPasswordExpire: Date,
+    phoneNumber: String,
+    isActivated: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

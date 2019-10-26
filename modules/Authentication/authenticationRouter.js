@@ -3,6 +3,9 @@ const router = express.Router();
 const authenticationController = require("./authenticationController");
 const authenticationValidation = require("./authenticationValidation");
 
+// Middlewares
+const auth = require("../../middlewares/auth");
+
 router
   .route("/create")
   .post(authenticationValidation.create, authenticationController.create);
@@ -10,5 +13,7 @@ router
 router
   .route("/login")
   .post(authenticationValidation.login, authenticationController.login);
+
+router.route("/").get(auth, authenticationController.get);
 
 module.exports = router;

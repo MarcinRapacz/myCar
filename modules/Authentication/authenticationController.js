@@ -50,3 +50,12 @@ module.exports.login = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.get = async (req, res, next) =>
+  res.status(200).json({
+    succes: true,
+    data: {
+      user: req.user
+    },
+    msg: "User details"
+  });
