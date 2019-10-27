@@ -14,7 +14,14 @@ router
   .route("/login")
   .post(authenticationValidation.login, authenticationController.login);
 
-router.route("/forgotpassword").put(authenticationController.forgotPassword);
+router.route("/forgot-password").put(authenticationController.forgotPassword);
+
+router
+  .route("/reset-password/:resetPasswordToken")
+  .put(
+    authenticationValidation.resetPassword,
+    authenticationController.resetPassword
+  );
 
 router
   .route("/")

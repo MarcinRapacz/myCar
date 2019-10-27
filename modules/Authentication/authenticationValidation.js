@@ -18,6 +18,12 @@ const config = {
   },
   phoneNumber: {
     locale: "pl-PL"
+  },
+  resetPasswordToken: {
+    field: "resetPasswordToken",
+    msg: "Reset Password Token out of range",
+    min: 32,
+    max: 32
   }
 };
 
@@ -52,4 +58,23 @@ module.exports.update = [
   validator
     .phoneNumber(undefined, undefined, config.phoneNumber.locale)
     .optional({ checkFalsy: true })
+];
+
+module.exports.resetPassword = [
+  validator.string(
+    config.password.field,
+    config.password.msg,
+    config.password.min
+  ),
+  validator.isSame(
+    config.password2.field,
+    config.password2.field2,
+    config.password2.msg
+  ),
+  validator.string(
+    config.resetPasswordToken.field,
+    config.resetPasswordToken.msg,
+    config.resetPasswordToken.min,
+    config.resetPasswordToken.max
+  )
 ];
