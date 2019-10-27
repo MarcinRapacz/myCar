@@ -46,6 +46,10 @@ module.exports.login = [
 ];
 
 module.exports.update = [
-  validator.string(config.name.field, config.name.msg, config.name.min),
-  validator.phoneNumber(undefined, undefined, config.phoneNumber.locale)
+  validator
+    .string(config.name.field, config.name.msg, config.name.min)
+    .optional({ checkFalsy: true }),
+  validator
+    .phoneNumber(undefined, undefined, config.phoneNumber.locale)
+    .optional({ checkFalsy: true })
 ];

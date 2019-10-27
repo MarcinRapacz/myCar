@@ -19,7 +19,7 @@ module.exports.string = (field, msg, min = 0, max = 400) =>
 module.exports.email = (field = "email") =>
   check(field)
     .isEmail()
-    .normalizeEmail();
+    .normalizeEmail({ gmail_remove_dots: false });
 
 /**
  * Check if fields is same
@@ -36,6 +36,4 @@ module.exports.isSame = (field1, field2, msg) =>
  * @param msg error message
  */
 module.exports.phoneNumber = (field = "phoneNumber", msg, locale) =>
-  check(field, msg)
-    .optional({ checkFalsy: true })
-    .isMobilePhone(locale);
+  check(field, msg).isMobilePhone(locale);
