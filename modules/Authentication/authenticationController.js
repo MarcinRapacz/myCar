@@ -189,3 +189,41 @@ module.exports.resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc      Create account to test
+// @route     GET /api/v1/authentication/create-test-account
+// @access    Public
+module.exports.createTestAccount = async (req, res, next) => {
+  try {
+    const randomName = crypto.randomBytes(8).toString("hex");
+    const randomPass = crypto.randomBytes(8).toString("hex");
+
+    // Create random user
+    const user = await Authentication.create({
+      name: `user-${randomName}`,
+      email: `${randomName}@test-account.com`,
+      password: randomPass,
+      isActivated: true
+    });
+
+    const token = user.getToken();
+
+    // Preapre data to response
+    const data = {
+      token,
+      user: {
+        name: user.name,
+        password: randomPass,
+        email: user.eamil
+      }
+    };
+
+    res.status(201).json({
+      succes: true,
+      data,
+      msg: "Created account to test"
+    });
+  } catch (error) {
+    next(error);
+  }
+};

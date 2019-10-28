@@ -11,6 +11,10 @@ router
   .post(authenticationValidation.create, authenticationController.create);
 
 router
+  .route("/create-test-account")
+  .get(authenticationController.createTestAccount);
+
+router
   .route("/login")
   .post(authenticationValidation.login, authenticationController.login);
 

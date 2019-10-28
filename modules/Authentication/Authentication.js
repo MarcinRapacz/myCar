@@ -30,6 +30,10 @@ const authenticationSchema = mongoose.Schema(
     isActivated: {
       type: Boolean,
       default: false
+    },
+    ranks: {
+      type: [String],
+      default: "user"
     }
   },
   { timestamps: true }
