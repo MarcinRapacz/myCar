@@ -13,6 +13,37 @@ module.exports.string = (field, msg, min = 0, max = 400) =>
     .isLength({ min, max });
 
 /**
+ * Check if field is correct number
+ * @param field field name
+ * @param msg error message
+ * @param min minimum value (default: 0)
+ * @param max maximum value
+ */
+module.exports.integer = (field, msg, min = 0, max) =>
+  check(field, msg).isInt({ min, max });
+
+/**
+ * Check if field is correct date
+ * @param field field name
+ * @param msg error message
+ * @param min minimum date
+ * @param max maximum date
+ */
+module.exports.date = (field, msg, min, max) =>
+  check(field, msg)
+    .isAfter(min)
+    .isBefore(max);
+
+/**
+ * Compare with pattern
+ * @param field field name
+ * @param msg error message
+ * @param pattern pattern
+ */
+module.exports.pattern = (field, msg, pattern) =>
+  check(field, msg).custom(value => pattern.includes(value));
+
+/**
  * Check if field is correct address email
  * @param field email address (default: email)
  */
@@ -37,3 +68,10 @@ module.exports.isSame = (field1, field2, msg) =>
  */
 module.exports.phoneNumber = (field = "phoneNumber", msg, locale) =>
   check(field, msg).isMobilePhone(locale);
+
+/**
+ * Check if field is correct MongoId
+ * @param field mongoId
+ * @param msg error message
+ */
+module.exports.mongoId = (field = "id", msg) => check(field, msg).isMongoId();

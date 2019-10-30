@@ -14,14 +14,18 @@ module.exports.create = async (req, res, next) => {
     handleValidator(req);
 
     // Variables
-    const { email } = req.body;
+    const { email, name, password } = req.body;
 
     // Check if the email address is free
     const isExists = await Authentication.findOne({ email });
     if (isExists) handleError({ msg: "User already exists", statusCode: 400 });
 
     // Store user
-    const authentication = await Authentication.create(req.body);
+    const authentication = await Authentication.create({
+      email,
+      name,
+      password
+    });
     const token = authentication.getToken();
 
     res
@@ -62,14 +66,16 @@ module.exports.login = async (req, res, next) => {
 // @desc      Get User details
 // @route     GET /api/v1/authentication
 // @access    Private
-module.exports.get = async (req, res, next) =>
+module.exports.get = async (req, res, next) => {
+  const user = await Authentication.findById(req.user._id).populate("cars");
   res.status(200).json({
     succes: true,
     data: {
-      user: req.user
+      user
     },
     msg: "User details"
   });
+};
 
 // @desc      Update User
 // @route     PUT /api/v1/authentication

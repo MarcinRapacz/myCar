@@ -36,7 +36,7 @@ const authenticationSchema = mongoose.Schema(
       default: "user"
     }
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 /**
@@ -74,6 +74,14 @@ authenticationSchema.pre("save", async function(next) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   }
+  next();
+});
+
+// Remove all user resorces
+authenticationSchema.pre("remove", async function(next) {
+  await this.model("Car").deleteMany({ user: this._id });
+
+  next();
 });
 
 // Handle Data Base Error
@@ -83,6 +91,14 @@ authenticationSchema.post("save", function(error, doc, next) {
   } else {
     next();
   }
+});
+
+// Virtuals
+authenticationSchema.virtual("cars", {
+  ref: "Car",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
 });
 
 module.exports = mongoose.model("Authentication", authenticationSchema);
