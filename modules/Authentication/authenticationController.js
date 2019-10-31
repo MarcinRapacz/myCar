@@ -67,7 +67,9 @@ module.exports.login = async (req, res, next) => {
 // @route     GET /api/v1/authentication
 // @access    Private
 module.exports.get = async (req, res, next) => {
-  const user = await Authentication.findById(req.user._id).populate("cars");
+  const user = await Authentication.findById(req.user._id)
+    .populate("cars")
+    .populate("owners");
   res.status(200).json({
     succes: true,
     data: {

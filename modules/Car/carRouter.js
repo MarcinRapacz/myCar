@@ -10,6 +10,13 @@ const auth = require("../../middlewares/auth");
 // Validators
 const carValidation = require("./carValidation");
 
+// Routers
+const ownerRouter = require("../Owner/ownerRouter");
+
+// Child router
+router.use("/:carId/owner", ownerRouter);
+
+// Auth Middleware
 router.use(auth);
 
 router

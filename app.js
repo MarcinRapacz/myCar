@@ -8,6 +8,7 @@ const connectToDataBase = require("./config/db");
 // Import Routers
 const authenticationRouter = require("./modules/Authentication/authenticationRouter");
 const carRouter = require("./modules/Car/carRouter");
+const ownerRouter = require("./modules/Owner/ownerRouter");
 
 const app = express();
 
@@ -22,6 +23,7 @@ connectToDataBase();
 // Routers
 app.use("/api/v1/authentication", authenticationRouter);
 app.use("/api/v1/car", carRouter);
+app.use("/api/v1/owner", ownerRouter);
 
 // Handle Error
 app.use((err, req, res, next) => {

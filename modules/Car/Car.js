@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CarSchema = mongoose.Schema(
+const carSchema = mongoose.Schema(
   {
     mark: {
       type: String,
@@ -8,7 +8,7 @@ const CarSchema = mongoose.Schema(
       max: [64, "max length 64"],
       require: [true, "field is required"]
     },
-    model: {
+    commercialModel: {
       type: String,
       min: [1, "min length 1"],
       max: [64, "max length 64"],
@@ -101,7 +101,22 @@ const CarSchema = mongoose.Schema(
       require: [true, "field is required"]
     }
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-module.exports = mongoose.model("Car", CarSchema);
+// Virtuals
+carSchema.virtual("owners", {
+  ref: "Owner",
+  localField: "_id",
+  foreignField: "car",
+  justOne: false
+});
+
+// Remove all user resorces
+carSchema.pre("remove", async function(next) {
+  await this.model("Owner").deleteMany({ car: this._id });
+
+  next();
+});
+
+module.exports = mongoose.model("Car", carSchema);

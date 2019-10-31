@@ -10,8 +10,8 @@ const config = {
     min: 1,
     max: 64
   },
-  model: {
-    field: "model",
+  commercialModel: {
+    field: "commercialModel",
     msg: "Value out of range",
     min: 1,
     max: 64
@@ -101,10 +101,10 @@ module.exports.create = [
     config.mark.max
   ),
   validator.string(
-    config.model.field,
-    config.model.msg,
-    config.model.min,
-    config.model.max
+    config.commercialModel.field,
+    config.commercialModel.msg,
+    config.commercialModel.min,
+    config.commercialModel.max
   ),
   validator.pattern(
     config.typeOfVehicle.field,
@@ -179,10 +179,10 @@ module.exports.update = [
     .optional(),
   validator
     .string(
-      config.model.field,
-      config.model.msg,
-      config.model.min,
-      config.model.max
+      config.commercialModel.field,
+      config.commercialModel.msg,
+      config.commercialModel.min,
+      config.commercialModel.max
     )
     .optional(),
   validator

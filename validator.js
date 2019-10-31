@@ -19,7 +19,7 @@ module.exports.string = (field, msg, min = 0, max = 400) =>
  * @param min minimum value (default: 0)
  * @param max maximum value
  */
-module.exports.integer = (field, msg, min = 0, max) =>
+module.exports.integer = (field, msg, min = 0, max = 1000) =>
   check(field, msg).isInt({ min, max });
 
 /**
@@ -51,6 +51,14 @@ module.exports.email = (field = "email") =>
   check(field)
     .isEmail()
     .normalizeEmail({ gmail_remove_dots: false });
+
+/**
+ * Check if field is correct post code
+ * @param field post code (default: postCode)
+ * @param locale locale (default: PL)
+ */
+module.exports.postCode = (field = "postCode", locale = "PL") =>
+  check(field).isPostalCode(locale);
 
 /**
  * Check if fields is same

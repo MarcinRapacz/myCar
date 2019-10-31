@@ -80,6 +80,7 @@ authenticationSchema.pre("save", async function(next) {
 // Remove all user resorces
 authenticationSchema.pre("remove", async function(next) {
   await this.model("Car").deleteMany({ user: this._id });
+  await this.model("Owner").deleteMany({ user: this._id });
 
   next();
 });
@@ -96,6 +97,13 @@ authenticationSchema.post("save", function(error, doc, next) {
 // Virtuals
 authenticationSchema.virtual("cars", {
   ref: "Car",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false
+});
+
+authenticationSchema.virtual("owners", {
+  ref: "Owner",
   localField: "_id",
   foreignField: "user",
   justOne: false

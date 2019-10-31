@@ -2,18 +2,21 @@ const handleValidator = require("../../utils/handleValidator");
 const handleError = require("../../utils/handleError");
 const Car = require("./Car");
 
-// @desc      Get all cars
+// @desc      Get car details
 // @route     GET /api/v1/car/:id
 // @access    Private
 module.exports.get = async (req, res, next) => {
   try {
     handleValidator(req);
 
-    const car = await Car.findOne({ _id: req.params.id, user: req.user._id });
+    const car = await Car.findOne({
+      _id: req.params.id,
+      user: req.user._id
+    }).populate("owners");
 
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
-    res.status(200).json({ msg: "Cars Array", data: { car }, success: true });
+    res.status(200).json({ msg: "Car details", data: { car }, success: true });
   } catch (error) {
     next(error);
   }
