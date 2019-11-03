@@ -13,10 +13,12 @@ const carValidation = require("./carValidation");
 // Routers
 const ownerRouter = require("../Owner/ownerRouter");
 const insuranceRouter = require("../Insurance/insuranceRouter");
+const collisionRouter = require("../Collision/collisionRouter");
 
 // Child router
 router.use("/:carId/owner", ownerRouter);
 router.use("/:carId/insurance", insuranceRouter);
+router.use("/:carId/collision", collisionRouter);
 
 // Auth Middleware
 router.use(auth);

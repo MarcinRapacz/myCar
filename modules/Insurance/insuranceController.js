@@ -74,7 +74,7 @@ module.exports.create = async (req, res, next) => {
     });
 
     res
-      .status(200)
+      .status(201)
       .json({ success: true, data: { insurance }, msg: "Insurance created" });
   } catch (error) {
     next(error);

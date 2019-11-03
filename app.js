@@ -10,6 +10,7 @@ const authenticationRouter = require("./modules/Authentication/authenticationRou
 const carRouter = require("./modules/Car/carRouter");
 const ownerRouter = require("./modules/Owner/ownerRouter");
 const insuranceRouter = require("./modules/Insurance/insuranceRouter");
+const collisionRouter = require("./modules/Collision/collisionRouter");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/v1/authentication", authenticationRouter);
 app.use("/api/v1/car", carRouter);
 app.use("/api/v1/owner", ownerRouter);
 app.use("/api/v1/insurance", insuranceRouter);
+app.use("/api/v1/collision", collisionRouter);
 
 // Handle Error
 app.use((err, req, res, next) => {

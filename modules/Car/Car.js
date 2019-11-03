@@ -116,7 +116,8 @@ carSchema.virtual("owners", {
 carSchema.pre("remove", async function(next) {
   await Promise.all([
     this.model("Owner").deleteMany({ car: this._id }),
-    this.model("Insurance").deleteMany({ car: this._id })
+    this.model("Insurance").deleteMany({ car: this._id }),
+    this.model("Collision").deleteMany({ car: this._id })
   ]);
 
   next();
