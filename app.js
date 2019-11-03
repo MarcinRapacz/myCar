@@ -9,6 +9,7 @@ const connectToDataBase = require("./config/db");
 const authenticationRouter = require("./modules/Authentication/authenticationRouter");
 const carRouter = require("./modules/Car/carRouter");
 const ownerRouter = require("./modules/Owner/ownerRouter");
+const insuranceRouter = require("./modules/Insurance/insuranceRouter");
 
 const app = express();
 
@@ -24,6 +25,7 @@ connectToDataBase();
 app.use("/api/v1/authentication", authenticationRouter);
 app.use("/api/v1/car", carRouter);
 app.use("/api/v1/owner", ownerRouter);
+app.use("/api/v1/insurance", insuranceRouter);
 
 // Handle Error
 app.use((err, req, res, next) => {

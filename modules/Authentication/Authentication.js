@@ -79,8 +79,11 @@ authenticationSchema.pre("save", async function(next) {
 
 // Remove all user resorces
 authenticationSchema.pre("remove", async function(next) {
-  await this.model("Car").deleteMany({ user: this._id });
-  await this.model("Owner").deleteMany({ user: this._id });
+  await Promise.all([
+    this.model("Car").deleteMany({ user: this._id }),
+    this.model("Owner").deleteMany({ user: this._id }),
+    this.model("Insurance").deleteMany({ user: this._id })
+  ]);
 
   next();
 });

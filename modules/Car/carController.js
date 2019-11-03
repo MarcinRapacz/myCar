@@ -9,10 +9,7 @@ module.exports.get = async (req, res, next) => {
   try {
     handleValidator(req);
 
-    const car = await Car.findOne({
-      _id: req.params.id,
-      user: req.user._id
-    }).populate("owners");
+    const car = await Car.findById(req.params.id);
 
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 

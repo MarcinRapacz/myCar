@@ -23,6 +23,13 @@ module.exports.integer = (field, msg, min = 0, max = 1000) =>
   check(field, msg).isInt({ min, max });
 
 /**
+ * Check if field is correct boolean value
+ * @param field field name
+ * @param msg error message
+ */
+module.exports.boolean = (field, msg) => check(field, msg).isBoolean();
+
+/**
  * Check if field is correct date
  * @param field field name
  * @param msg error message

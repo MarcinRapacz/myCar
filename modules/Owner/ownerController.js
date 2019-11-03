@@ -12,10 +12,9 @@ module.exports.getAll = async (req, res, next) => {
     handleValidator(req);
 
     const { carId } = req.params;
-    const user = req.user._id;
 
     // Check if car exists
-    const car = await Car.findOne({ _id: carId, user });
+    const car = await Car.findById(carId);
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
     // Check if car exists
@@ -97,13 +96,9 @@ module.exports.update = async (req, res, next) => {
     delete req.body.createdAt;
     delete req.body.updatedAt;
 
-    const owner = await Owner.findOneAndUpdate(
-      { _id: req.params.id, user: req.user._id },
-      req.body,
-      {
-        new: true
-      }
-    );
+    const owner = await Owner.findOneAndUpdate({ _id: id, user }, req.body, {
+      new: true
+    });
     if (!owner) handleError({ msg: "Owner not found", statusCode: 404 });
 
     res
