@@ -11,6 +11,7 @@ const carRouter = require("./modules/Car/carRouter");
 const ownerRouter = require("./modules/Owner/ownerRouter");
 const insuranceRouter = require("./modules/Insurance/insuranceRouter");
 const collisionRouter = require("./modules/Collision/collisionRouter");
+const avaliableAnnotationsRouter = require("./modules/AvaliableAnnotations/avaliableAnnotationsRouter");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/v1/car", carRouter);
 app.use("/api/v1/owner", ownerRouter);
 app.use("/api/v1/insurance", insuranceRouter);
 app.use("/api/v1/collision", collisionRouter);
+app.use("/api/v1/avaliable-annotation", avaliableAnnotationsRouter);
 
 // Handle Error
 app.use((err, req, res, next) => {
