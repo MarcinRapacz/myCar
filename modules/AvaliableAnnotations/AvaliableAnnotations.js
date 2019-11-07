@@ -17,6 +17,15 @@ const avaliableAnnotationsSchema = mongoose.Schema({
   }
 });
 
+// Remove all user resorces
+avaliableAnnotationsSchema.pre("remove", async function(next) {
+  await Promise.all([
+    this.model("Annotation").deleteMany({ details: this._id })
+  ]);
+
+  next();
+});
+
 module.exports = mongoose.model(
   "AvaliableAnnotations",
   avaliableAnnotationsSchema

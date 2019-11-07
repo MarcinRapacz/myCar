@@ -16,7 +16,7 @@ module.exports.list = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: { list },
+      data: { quantity: list.length, list },
       msg: "Alaliable annotations list "
     });
   } catch (error) {

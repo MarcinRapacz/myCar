@@ -83,7 +83,8 @@ authenticationSchema.pre("remove", async function(next) {
     this.model("Car").deleteMany({ user: this._id }),
     this.model("Owner").deleteMany({ user: this._id }),
     this.model("Insurance").deleteMany({ user: this._id }),
-    this.model("Collision").deleteMany({ user: this._id })
+    this.model("Collision").deleteMany({ user: this._id }),
+    this.model("Annotation").deleteMany({ user: this._id })
   ]);
 
   next();
