@@ -4,7 +4,7 @@ const config = {
   name: {
     field: "name",
     msg: "Invalid name",
-    min: 0,
+    min: 1,
     max: 128
   },
   slugifyText: {

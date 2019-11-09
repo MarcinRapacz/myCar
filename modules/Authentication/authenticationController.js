@@ -220,7 +220,7 @@ module.exports.createTestAccount = async (req, res, next) => {
       user: {
         name: user.name,
         password: randomPass,
-        email: user.eamil
+        email: user.email
       }
     };
 

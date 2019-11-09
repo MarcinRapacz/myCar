@@ -117,7 +117,9 @@ module.exports.update = async (req, res, next) => {
     if (!collision)
       handleError({ msg: "Collision not found", statusCode: 404 });
 
-    res.status(200).json({ success: true, data: {}, msg: "Collision updated" });
+    res
+      .status(200)
+      .json({ success: true, data: { collision }, msg: "Collision updated" });
   } catch (error) {
     next(error);
   }

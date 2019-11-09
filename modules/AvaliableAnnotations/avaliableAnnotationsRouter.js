@@ -12,15 +12,17 @@ const auth = require("../../middlewares/auth");
 const admin = require("../../middlewares/admin");
 
 router.use(auth);
-router.use(admin);
 
 router
   .route("/")
   .get(avaliableAnnotationsValidation.list, avaliableAnnotationsController.list)
   .post(
+    admin,
     avaliableAnnotationsValidation.create,
     avaliableAnnotationsController.create
   );
+
+router.use(admin);
 router
   .route("/:slugifyText")
   .put(

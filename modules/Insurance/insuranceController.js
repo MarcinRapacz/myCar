@@ -10,13 +10,14 @@ module.exports.list = async (req, res, next) => {
   try {
     handleValidator(req);
     const { carId } = req.params;
+    const user = req.user._id;
 
     // Check if car exists
     const car = await Car.findById(carId);
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
     // Find all insurance
-    const list = await Insurance.find({ car: carId });
+    const list = await Insurance.find({ car: carId, user });
 
     res.status(200).json({
       success: true,
@@ -36,9 +37,8 @@ module.exports.get = async (req, res, next) => {
     handleValidator(req);
 
     const { id } = req.params;
-    const user = req.user._id;
 
-    const insurance = await Insurance.findOne({ _id: id, user });
+    const insurance = await Insurance.findById(id);
     if (!insurance) handleError({ msg: "Insurance not found" });
 
     res

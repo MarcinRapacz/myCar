@@ -7,7 +7,7 @@ const Car = require("../Car/Car");
 
 // @desc      Add new annotation
 // @route     POST /api/v1/car/:carId/annotation
-// @access    Private
+// @access    Private (car owner)
 module.exports.create = async (req, res, next) => {
   try {
     handleValidator(req);
@@ -60,7 +60,7 @@ module.exports.list = async (req, res, next) => {
     const { carId } = req.params;
 
     // Check if car exists
-    const car = await Car.findOne({ _id: carId, user: req.user._id });
+    const car = await Car.findById(carId);
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
     // Fina all annotations
@@ -78,7 +78,7 @@ module.exports.list = async (req, res, next) => {
 
 // @desc      Get annotation details
 // @route     GET /api/v1/annotation/:id
-// @access    Private
+// @access    Private (car owner)
 module.exports.get = async (req, res, next) => {
   try {
     handleValidator(req);
@@ -101,7 +101,7 @@ module.exports.get = async (req, res, next) => {
 
 // @desc      Update annotation
 // @route     PUT /api/v1/annotation/:id
-// @access    Private
+// @access    Private (car owner)
 module.exports.update = async (req, res, next) => {
   try {
     handleValidator(req);

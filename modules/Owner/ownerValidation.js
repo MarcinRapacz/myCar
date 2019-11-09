@@ -33,7 +33,8 @@ const config = {
   numberOfChildrenUnder18Years: {
     field: "numberOfChildrenUnder18Years",
     msg: "Value out of range",
-    min: 0
+    min: 0,
+    max: 63
   }
 };
 

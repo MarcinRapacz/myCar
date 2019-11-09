@@ -7,7 +7,7 @@ const handleError = require("../../utils/handleError");
 
 // @desc      Get list avaliable annotations
 // @route     GET /api/v1/avaliable-annotation
-// @access    Private (Admin)
+// @access    Private
 module.exports.list = async (req, res, next) => {
   try {
     handleValidator(req);
