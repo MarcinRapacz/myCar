@@ -8,9 +8,15 @@ https://documenter.getpostman.com/view/2876870/SW18wFCY
 
 #### Tech Stack
 
-NodeJS with ExpressJS framework
-MongoDB in MongoDB Atlas with mongoose extension
-Heroku server to deploy app
+#### Tech Stack
+
+- NodeJS with ExpressJS framework
+- MongoDB in MongoDB Atlas with mongoose extension
+- Heroku server to deploy app
+
+#### Version
+
+1.0.0
 
 #### License
 

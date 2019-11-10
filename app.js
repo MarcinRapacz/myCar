@@ -3,6 +3,7 @@ require("dotenv").config({ path: "./config/config.env" });
 
 // Imports
 const express = require("express");
+const cors = require("cors");
 const connectToDataBase = require("./config/db");
 
 // Import Routers
@@ -15,6 +16,9 @@ const avaliableAnnotationsRouter = require("./modules/AvaliableAnnotations/avali
 const annotationRouter = require("./modules/Annotation/annotationRouter");
 
 const app = express();
+
+// CORS
+app.use(cors());
 
 // Body parser
 app.use(express.json());
