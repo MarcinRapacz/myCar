@@ -16,7 +16,7 @@ module.exports.list = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: { quantity: list.length, list },
+      content: { quantity: list.length, list },
       msg: "Alaliable annotations list "
     });
   } catch (error) {
@@ -51,7 +51,7 @@ module.exports.create = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: { avaliableAnnotation },
+      content: { avaliableAnnotation },
       msg: "New alaliable annotations added "
     });
   } catch (error) {
@@ -93,7 +93,7 @@ module.exports.update = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { avaliableAnnotation },
+      content: { avaliableAnnotation },
       msg: "Alaliable annotations updated "
     });
   } catch (error) {
@@ -120,7 +120,7 @@ module.exports.delete = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: {},
+      content: {},
       msg: "Avaliable annotations removed "
     });
   } catch (error) {

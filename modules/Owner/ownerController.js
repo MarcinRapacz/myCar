@@ -22,7 +22,7 @@ module.exports.getAll = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { quantity: owners.length, owners },
+      content: { quantity: owners.length, owners },
       msg: `Car ${carId} owners were returned`
     });
   } catch (error) {
@@ -45,7 +45,7 @@ module.exports.get = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { owner },
+      content: { owner },
       msg: `Owner details`
     });
   } catch (error) {
@@ -72,7 +72,7 @@ module.exports.create = async (req, res, next) => {
 
     res
       .status(201)
-      .json({ success: true, data: { owner }, msg: "Owner added" });
+      .json({ success: true, content: { owner }, msg: "Owner added" });
   } catch (error) {
     next(error);
   }
@@ -103,7 +103,7 @@ module.exports.update = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: { owner }, msg: "Owner updated" });
+      .json({ success: true, content: { owner }, msg: "Owner updated" });
   } catch (error) {
     next(error);
   }
@@ -124,7 +124,9 @@ module.exports.delete = async (req, res, next) => {
 
     await owner.remove();
 
-    res.status(200).json({ success: true, msg: "Owner was removed", data: {} });
+    res
+      .status(200)
+      .json({ success: true, msg: "Owner was removed", content: {} });
   } catch (error) {
     next(error);
   }

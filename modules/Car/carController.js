@@ -13,7 +13,9 @@ module.exports.get = async (req, res, next) => {
 
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
-    res.status(200).json({ msg: "Car details", data: { car }, success: true });
+    res
+      .status(200)
+      .json({ msg: "Car details", content: { car }, success: true });
   } catch (error) {
     next(error);
   }
@@ -27,7 +29,7 @@ module.exports.getAll = async (req, res, next) => {
     const cars = await Car.find({ user: req.user._id });
     res.status(200).json({
       msg: "Cars Array",
-      data: { quantity: cars.length, cars },
+      content: { quantity: cars.length, cars },
       success: true
     });
   } catch (error) {
@@ -44,7 +46,9 @@ module.exports.create = async (req, res, next) => {
 
     const car = await Car.create({ ...req.body, user: req.user._id });
 
-    res.status(201).json({ msg: "Car created", data: { car }, success: true });
+    res
+      .status(201)
+      .json({ msg: "Car created", content: { car }, success: true });
   } catch (error) {
     next(error);
   }
@@ -76,7 +80,7 @@ module.exports.update = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ msg: "Car was updated", success: true, data: { car } });
+      .json({ msg: "Car was updated", success: true, content: { car } });
   } catch (error) {
     next(error);
   }
@@ -97,7 +101,9 @@ module.exports.delete = async (req, res, next) => {
 
     await car.remove();
 
-    res.status(200).json({ success: true, msg: "Car was removed", data: {} });
+    res
+      .status(200)
+      .json({ success: true, msg: "Car was removed", content: {} });
   } catch (error) {
     next(error);
   }

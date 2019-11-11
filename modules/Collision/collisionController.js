@@ -29,7 +29,7 @@ module.exports.list = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { quantity: list.length, list },
+      content: { quantity: list.length, list },
       msg: "Collision list"
     });
   } catch (error) {
@@ -60,7 +60,11 @@ module.exports.create = async (req, res, next) => {
 
     res
       .status(201)
-      .json({ success: true, data: { collision }, msg: "Collision created" });
+      .json({
+        success: true,
+        content: { collision },
+        msg: "Collision created"
+      });
   } catch (error) {
     next(error);
   }
@@ -83,7 +87,11 @@ module.exports.get = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: { collision }, msg: "Collision details" });
+      .json({
+        success: true,
+        content: { collision },
+        msg: "Collision details"
+      });
   } catch (error) {
     next(error);
   }
@@ -119,7 +127,11 @@ module.exports.update = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: { collision }, msg: "Collision updated" });
+      .json({
+        success: true,
+        content: { collision },
+        msg: "Collision updated"
+      });
   } catch (error) {
     next(error);
   }
@@ -142,7 +154,9 @@ module.exports.delete = async (req, res, next) => {
 
     await collision.remove();
 
-    res.status(200).json({ success: true, data: {}, msg: "Collision removed" });
+    res
+      .status(200)
+      .json({ success: true, content: {}, msg: "Collision removed" });
   } catch (error) {
     next(error);
   }

@@ -21,7 +21,7 @@ module.exports.list = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { quantity: list.length, list },
+      content: { quantity: list.length, list },
       msg: "Insurance list"
     });
   } catch (error) {
@@ -43,7 +43,11 @@ module.exports.get = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: { insurance }, msg: "Insurance details" });
+      .json({
+        success: true,
+        content: { insurance },
+        msg: "Insurance details"
+      });
   } catch (error) {
     next(error);
   }
@@ -75,7 +79,11 @@ module.exports.create = async (req, res, next) => {
 
     res
       .status(201)
-      .json({ success: true, data: { insurance }, msg: "Insurance created" });
+      .json({
+        success: true,
+        content: { insurance },
+        msg: "Insurance created"
+      });
   } catch (error) {
     next(error);
   }
@@ -111,7 +119,7 @@ module.exports.update = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: { insurance }, msg: "Insurance update" });
+      .json({ success: true, content: { insurance }, msg: "Insurance update" });
   } catch (error) {
     next(error);
   }
@@ -133,7 +141,9 @@ module.exports.delete = async (req, res, next) => {
 
     await insurance.remove();
 
-    res.status(200).json({ success: true, data: {}, msg: "Insurance removed" });
+    res
+      .status(200)
+      .json({ success: true, content: {}, msg: "Insurance removed" });
   } catch (error) {
     next(error);
   }

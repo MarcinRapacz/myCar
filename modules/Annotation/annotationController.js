@@ -43,9 +43,11 @@ module.exports.create = async (req, res, next) => {
       user: req.user._id
     });
 
-    res
-      .status(201)
-      .json({ success: true, data: { annotation }, msg: "Annotation created" });
+    res.status(201).json({
+      success: true,
+      content: { annotation },
+      msg: "Annotation created"
+    });
   } catch (error) {
     next(error);
   }
@@ -68,7 +70,7 @@ module.exports.list = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { quantity: list.length, list },
+      content: { quantity: list.length, list },
       msg: "Annotations list"
     });
   } catch (error) {
@@ -91,9 +93,11 @@ module.exports.get = async (req, res, next) => {
     if (!annotation)
       handleError({ msg: "Annotation not found", statusCode: 404 });
 
-    res
-      .status(200)
-      .json({ success: true, data: { annotation }, msg: "Annotation details" });
+    res.status(200).json({
+      success: true,
+      content: { annotation },
+      msg: "Annotation details"
+    });
   } catch (error) {
     next(error);
   }
@@ -120,9 +124,11 @@ module.exports.update = async (req, res, next) => {
     if (!annotation)
       handleError({ msg: "Annotation not found", statusCode: 404 });
 
-    res
-      .status(200)
-      .json({ success: true, data: { annotation }, msg: "Annotation updated" });
+    res.status(200).json({
+      success: true,
+      content: { annotation },
+      msg: "Annotation updated"
+    });
   } catch (error) {
     next(error);
   }
@@ -145,7 +151,7 @@ module.exports.delete = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, data: {}, msg: "Annotation removed" });
+      .json({ success: true, content: {}, msg: "Annotation removed" });
   } catch (error) {
     next(error);
   }

@@ -30,7 +30,7 @@ module.exports.create = async (req, res, next) => {
 
     res
       .status(201)
-      .json({ succes: true, data: { token }, msg: "User was created" });
+      .json({ succes: true, content: { token }, msg: "User was created" });
   } catch (error) {
     next(error);
   }
@@ -57,7 +57,7 @@ module.exports.login = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ succes: true, data: { token }, msg: "User was logged" });
+      .json({ succes: true, content: { token }, msg: "User was logged" });
   } catch (error) {
     next(error);
   }
@@ -70,7 +70,7 @@ module.exports.get = async (req, res, next) => {
   const user = await Authentication.findById(req.user._id);
   res.status(200).json({
     succes: true,
-    data: {
+    content: {
       user
     },
     msg: "User details"
@@ -96,7 +96,7 @@ module.exports.update = async (req, res, next) => {
 
     res.status(200).json({
       succes: true,
-      data: { token },
+      content: { token },
       msg: "User updated"
     });
   } catch (error) {
@@ -113,7 +113,7 @@ module.exports.delete = async (req, res, next) => {
 
     res.status(200).json({
       succes: true,
-      data: {},
+      content: {},
       msg: "User removed"
     });
   } catch (error) {
@@ -154,7 +154,7 @@ module.exports.forgotPassword = async (req, res, next) => {
 
     res.status(200).json({
       succes: true,
-      data: {
+      content: {
         resetPasswordExpire: user.resetPasswordExpire,
         resetPasswordToken: user.resetPasswordToken
       },
@@ -190,7 +190,7 @@ module.exports.resetPassword = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ msg: "Password was changed", data: { token }, success: true });
+      .json({ msg: "Password was changed", content: { token }, success: true });
   } catch (error) {
     next(error);
   }
@@ -215,7 +215,7 @@ module.exports.createTestAccount = async (req, res, next) => {
     const token = user.getToken();
 
     // Preapre data to response
-    const data = {
+    const content = {
       token,
       user: {
         name: user.name,
@@ -226,7 +226,7 @@ module.exports.createTestAccount = async (req, res, next) => {
 
     res.status(201).json({
       succes: true,
-      data,
+      content,
       msg: "Created account to test"
     });
   } catch (error) {
