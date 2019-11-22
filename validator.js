@@ -1,4 +1,4 @@
-const { check } = require("express-validator");
+const { check, body } = require("express-validator");
 
 /**
  * Check if string is valid
@@ -48,7 +48,7 @@ module.exports.date = (field, msg, min, max) =>
  * @param pattern pattern
  */
 module.exports.pattern = (field, msg, pattern) =>
-  check(field, msg).custom(value => pattern.includes(value));
+  body(field, msg).custom(value => pattern.includes(value));
 
 /**
  * Check if field is correct address email

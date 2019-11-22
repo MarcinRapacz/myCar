@@ -40,13 +40,13 @@ const carSchema = mongoose.Schema(
     capacity: {
       type: Number,
       min: [0, "min length 0"],
-      max: [3000, "max length 3000"],
+      max: [100000, "max length 100000"],
       require: [true, "field is required"]
     },
     power: {
       type: Number,
       min: [0, "min length 0"],
-      max: [3000, "max length 3000"],
+      max: [10000, "max length 10000"],
       require: [true, "field is required"]
     },
     fuel: {

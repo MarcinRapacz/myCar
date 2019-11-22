@@ -43,13 +43,13 @@ const config = {
     field: "capacity",
     msg: "Value out of range",
     min: 0,
-    max: 3000
+    max: 100000
   },
   power: {
     field: "power",
     msg: "Value out of range",
     min: 0,
-    max: 3000
+    max: 10000
   },
   fuel: {
     field: "fuel",
