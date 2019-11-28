@@ -17,7 +17,7 @@ module.exports.list = async (req, res, next) => {
     if (!car) handleError({ msg: "Car not found", statusCode: 404 });
 
     // Find all insurance
-    const list = await Insurance.find({ car: carId, user });
+    const list = await Insurance.find({ car: carId });
 
     res.status(200).json({
       success: true,
@@ -41,13 +41,11 @@ module.exports.get = async (req, res, next) => {
     const insurance = await Insurance.findById(id);
     if (!insurance) handleError({ msg: "Insurance not found" });
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        content: { insurance },
-        msg: "Insurance details"
-      });
+    res.status(200).json({
+      success: true,
+      content: { insurance },
+      msg: "Insurance details"
+    });
   } catch (error) {
     next(error);
   }
@@ -77,13 +75,11 @@ module.exports.create = async (req, res, next) => {
       user: req.user._id
     });
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        content: { insurance },
-        msg: "Insurance created"
-      });
+    res.status(201).json({
+      success: true,
+      content: { insurance },
+      msg: "Insurance created"
+    });
   } catch (error) {
     next(error);
   }

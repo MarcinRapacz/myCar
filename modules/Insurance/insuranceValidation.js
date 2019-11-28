@@ -15,8 +15,8 @@ const config = {
   to: {
     field: "to",
     msg: "Value out of range",
-    min: new Date(Date.now() - 1 * 365 * 24 * 60 * 60 * 1000).toLocaleString(),
-    max: new Date(Date.now() + 1 * 365 * 24 * 60 * 60 * 1000).toLocaleString()
+    min: new Date(Date.now() - 1 * 366 * 24 * 60 * 60 * 1000).toLocaleString(),
+    max: new Date(Date.now() + 1 * 366 * 24 * 60 * 60 * 1000).toLocaleString()
   },
   company: {
     field: "company",
